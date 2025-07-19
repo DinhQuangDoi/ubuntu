@@ -9,7 +9,7 @@
   - `pkg update -y && pkg upgrade -y`
   - `pkg install git wget -y`
   - `git clone https://github.com/DinhQuangDoi/ubuntu-no-gui.git`
-  - `cd modded-ubuntu`
+  - `cd ubuntu`
   - `bash setup.sh`
 
 - Khởi động lại Termux & Nhập các lệnh bên dưới
