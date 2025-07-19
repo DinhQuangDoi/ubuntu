@@ -8,7 +8,7 @@
 
   - `pkg update -y && pkg upgrade -y`
   - `pkg install git wget -y`
-  - `git clone https://github.com/DinhQuangDoi/ubuntu-no-gui.git`
+  - `git clone https://github.com/DinhQuangDoi/ubuntu.git`
   - `cd ubuntu`
   - `bash setup.sh`
 
