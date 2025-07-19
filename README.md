@@ -6,7 +6,7 @@
 - B1 Cài đặt [Termux](https://termux.com) apk từ [Đây](https://f-droid.org/repo/com.termux_118.apk)
 - B2 Clone dự án & Chạy các file setup
 
-  - `yes | pkg up`
+  - `pkg update -y && pkg upgrade -y`
   - `pkg install git wget -y`
   - `git clone --depth=1 https://github.com/DinhQuangDoi/ubuntu-no-gui.git`
   - `cd modded-ubuntu`
