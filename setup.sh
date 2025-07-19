@@ -83,7 +83,11 @@ permission() {
 		mv -f "$CURR_DIR/user.sh" "$UBUNTU_DIR/root/user.sh"
 	fi
 	chmod +x $UBUNTU_DIR/root/user.sh
-
+        setup_vnc
+	echo "$(getprop persist.sys.timezone)" > $UBUNTU_DIR/etc/timezone
+	echo "proot-distro login ubuntu" > $PREFIX/bin/ubuntu
+	chmod +x "$PREFIX/bin/ubuntu"
+	termux-reload-settings
 
 	if [[ -e "$PREFIX/bin/ubuntu" ]]; then
 		banner
