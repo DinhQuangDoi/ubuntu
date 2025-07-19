@@ -43,7 +43,7 @@ login() {
     clear
     echo
     echo -e "\n${R} [${W}-${R}]${G} Khởi động lại Termux & Nhập ${C}ubuntu"${W}
-    echo -e "\n${R} [${W}-${R}]${G} Xong ${W}
+    echo -e "\n${R} [${W}-${R}]${G} Xong "${W}
     echo
 
 }
