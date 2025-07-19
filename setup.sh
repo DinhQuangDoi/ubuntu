@@ -95,6 +95,7 @@ permission() {
 			${R} [${W}-${R}]${G} Ubuntu-22.04 (CLI) đã được cài đặt trên Termux của bạn
 			${R} [${W}-${R}]${G} Khởi động lại Termux để ngăn một vài lỗi.
 			${R} [${W}-${R}]${G} Nhập ${C}ubuntu${G} để khởi động Ubuntu CLI.
+                        ${R} [${W}-${R}]${G} Sau khi khởi động lại Ubuntu nhập ${C}bash user.sh${G} để bắt đầu quá trình setup.
 		EOF
 		{ echo; sleep 2; exit 1; }
 	else
