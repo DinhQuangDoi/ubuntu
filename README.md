@@ -48,5 +48,5 @@ Termux Proot Distro - https://github.com/termux/proot-distro
 - [**0xBaryonyx**](https://github.com/Mahfuz-THBD)
 
 
-### Nếu bạn thích có thể truy cập dự án gốc ở liên kết phía trên để tặng sao.
+### Nếu bạn thích có thể truy cập dự án gốc ở liên kết ở phần Giới Thiệu để tặng sao.
 
