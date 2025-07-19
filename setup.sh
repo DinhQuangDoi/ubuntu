@@ -25,7 +25,7 @@ package() {
 	banner
 	echo -e "${R} [${W}-${R}]${C} Đang kiểm tra các gói cần thiết..."${W}
 	
-	[ ! -d '/data/data/com.termux/files/home/storage' ] && echo -e "${R} [${W}-${R}]${C} Setting up Storage.."${W} && termux-setup-storage
+	[ ! -d '/data/data/com.termux/files/home/storage' ] && echo -e "${R} [${W}-${R}]${C} Thiết lập bộ nhớ.."${W} && termux-setup-storage
 
 	if [[ $(command -v pulseaudio) && $(command -v proot-distro) ]]; then
 		echo -e "\n${R} [${W}-${R}]${G} Các gói đã được cài đặt."${W}
@@ -89,7 +89,7 @@ permission() {
 		banner
 		cat <<- EOF
 			${R} [${W}-${R}]${G} Ubuntu-22.04 (CLI) đã được cài đặt trên Termux của bạn
-			${R} [${W}-${R}]${G} Khởi động lạiTermux để ngăn một vài lỗi.
+			${R} [${W}-${R}]${G} Khởi động lại Termux để ngăn một vài lỗi.
 			${R} [${W}-${R}]${G} Nhập ${C}ubuntu${G} để khởi động Ubuntu CLI.
 		EOF
 		{ echo; sleep 2; exit 1; }
@@ -102,5 +102,4 @@ permission() {
 
 package
 distro
-sound
 permission
