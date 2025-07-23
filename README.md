@@ -1,9 +1,9 @@
-### Introduce
+### Introduce.
 
 - This is Ubuntu Termux removed GUI version fork from https://github.com/modded-ubuntu/modded-ubuntu.git
-### Install
+### Install.
 - Install [Termux](https://termux.com) apk from [Here](https://f-droid.org/repo/com.termux_118.apk)
-- Coppy & paste command
+- Coppy & paste command.
 ```
   pkg update -y && pkg upgrade -y
   pkg install git wget -y
@@ -11,24 +11,27 @@
   cd ubuntu
   bash setup.sh
 ```
-- Restart Termux & paste or type command
+- Restart Termux & paste or type command.
 
    - `ubuntu`
    - `bash user.sh`
 
-- You can omit "bash user.sh" if you are only using the root user
+- You can omit "bash user.sh" if you are only using the root user.
 
-- Restart Termux & type command to update user
+- Restart Termux & type command to update user.
 
    - `ubuntu` 
-- Enjoy :D
+- Enjoy :D.
 
 ### NOTE :
 
 - **Type `ubuntu` to login Ubuntu CLI.**
 
-- **Type `bash remove.sh` to remove Ubuntu Modded Os**
+- **Type `bash remove.sh` to remove Ubuntu Modded Os.**
 
+### Changelog: 
+- added build tool installation option for users who want to compile kernel.
+- edit banner.
 
 ### Credits : 
 
@@ -40,7 +43,7 @@ Full Credit of the Ubuntu image goes to them .
 Termux Proot Distro - https://github.com/termux/proot-distro
 ```
 
-### Maintainers
+### Maintainers.
 
 - [**Mustakim Ahmed**](https://github.com/BDhackers009)
 - [**Tahmid Rayat**](https://github.com/htr-tech)
