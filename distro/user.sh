@@ -8,13 +8,13 @@ C="$(printf '\033[1;36m')"
 
 banner() {
     clear
-    local text="Ubuntu Termux - User Setup" # Updated text for this script
+    local text="Ubuntu Termux - User Setup"
     local term_width=$(tput cols)
     local text_len=${#text}
     local padding=$(( (term_width - text_len) / 2 ))
     
     printf "%*s%s%*s\n" $padding "" "${G}${text}${W}" $padding ""
-    printf "${W}\n" # Empty line below the banner
+    printf "${W}\n"
 }
 
 install_sudo_and_tools() {
@@ -44,10 +44,9 @@ create_user() {
     echo '${UBUNTU_NEW_USER}:${UBUNTU_NEW_PASS}' | chpasswd;
     echo '${UBUNTU_NEW_USER} ALL=(ALL:ALL) NOPASSWD:ALL' >> /etc/sudoers;
     mkdir -p /home/${UBUNTU_NEW_USER}/phoenix;
-    chown -R ${UBUNTU_NEW_USER}:${UBUNTU_NEW_USER} /home/${UBUNTU_NEW_USER};
-    echo -e '\\n${R} [${W}-${R}]${G} User ${UBUNTU_NEW_USER} created and configured!\\n${W}'
+    chown -R ${UBUNTU_NEW_USER}:${UBTU_NEW_USER} /home/${UBTU_NEW_USER};
+    echo -e '\\n${R} [${W}-${R}]${G} User ${UBTU_NEW_USER} created and configured!\\n${W}'
 
-    # Create the 'user_setup_done' flag file in root's home
     touch /root/.user_setup_done
     
     local termux_prefix_path="/data/data/com.termux/files/usr"
