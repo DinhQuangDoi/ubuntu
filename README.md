@@ -1,34 +1,33 @@
 ### Giới Thiệu 
 
-- Đây là phiên bản Ubuntu termux được fork từ https://github.com/modded-ubuntu/modded-ubuntu.git
-- Đã Vietsub và loại bỏ script cài đặt GUI dành cho những người dùng không sử dụng GUI
-### Cài Đặt 
-- B1 Cài đặt [Termux](https://termux.com) apk từ [Đây](https://f-droid.org/repo/com.termux_118.apk)
-- B2 Clone dự án & Chạy các file setup
-
-  - `pkg update -y && pkg upgrade -y`
-  - `pkg install git wget -y`
-  - `git clone https://github.com/DinhQuangDoi/ubuntu.git`
-  - `cd ubuntu`
-  - `bash setup.sh`
-
-- Khởi động lại Termux & Nhập các lệnh bên dưới
+- This is Ubuntu Termux removed GUI version fork from https://github.com/modded-ubuntu/modded-ubuntu.git
+### Install
+- B1 Install [Termux](https://termux.com) apk from [Here](https://f-droid.org/repo/com.termux_118.apk)
+- B2 Coppy & paste command
+```
+  pkg update -y && pkg upgrade -y
+  pkg install git wget -y
+  git clone https://github.com/DinhQuangDoi/ubuntu.git
+  cd ubuntu
+  bash setup.sh
+```
+- Restart Termux & paste or type command
 
    - `ubuntu`
    - `bash user.sh`
 
-- Nhập tên người dùng root Ubuntu của bạn. Phải viết thường và không có khoảng trắng.
+- You can omit "bash user.sh" if you are only using the root user
 
-- Khởi động lại Termux & Nhập lệnh bên dưới
+- Restart Termux & type command to update user
 
    - `ubuntu` 
 - Enjoy :D
 
 ### NOTE :
 
-- **Nhập `ubuntu` để khởi động Ubuntu CLI.**
+- **Type `ubuntu` to login Ubuntu CLI.**
 
-- **Nhập `bash remove.sh` Để xoá Ubuntu Modded Os**
+- **Type `bash remove.sh` to remove Ubuntu Modded Os**
 
 
 ### Credits : 
@@ -48,5 +47,5 @@ Termux Proot Distro - https://github.com/termux/proot-distro
 - [**0xBaryonyx**](https://github.com/Mahfuz-THBD)
 
 
-### Nếu bạn thích có thể truy cập dự án gốc ở liên kết ở phần Giới Thiệu để tặng sao.
+### Hope it helps you <3.
 
