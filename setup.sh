@@ -18,7 +18,7 @@ banner() {
     local padding=$(( (term_width - text_len) / 2 ))
     
     printf "%*s%s%*s\n" $padding "" "${G}${text}${W}" $padding ""
-    printf "${W}\n" # Empty line below the banner
+    printf "${W}\n"
 }
 
 package() {
@@ -56,21 +56,28 @@ distro() {
 	if [[ -d "$UBUNTU_DIR" ]]; then
 		echo -e "\n${R} [${W}-${R}]${G} Distro Installation Complete! Proceeding with initial setup inside Ubuntu..."${W}
         
-        # Log into Ubuntu with root and bind internal storage, then execute setup commands
-        proot_login_cmd="proot-distro login ubuntu --user root"
-        bind_mount_path="/data/data/com.termux/files/home/storage/shared:/mnt/shared"
-        
-        echo -e "\n${R} [${W}-${R}]${C} Logging into Ubuntu as root and binding internal storage..."${W}
-        ${proot_login_cmd} --bind ${bind_mount_path} -- bash -c " \
-            echo -e '\\n${R} [${W}-${R}]${C} Updating Ubuntu packages...${W}'; \
-            apt update && apt upgrade -y; \
-            echo -e '\\n${R} [${W}-${R}]${C} Installing required build tools...${W}'; \
-            apt install -y git make gcc clang libssl-dev pkg-config flex bison libelf-dev libncurses-dev python3 python-is-python3 dos2unix curl unzip zip openjdk-17-jre; \
-            echo -e '\\n${R} [${W}-${R}]${G} Initial Ubuntu setup (tools) complete!\\n${W}' \
-        "
-        if [[ $? -ne 0 ]]; then
-            echo -e "\n${R} [${W}-${R}]${G} Error: Failed to complete initial setup inside Ubuntu!\n"${W}
-            exit 1
+        echo -e "\n${R} [${W}-${R}]${Y} Do you want to install common kernel build tools (git, make, gcc, clang, etc.) inside Ubuntu? (y/n): ${W}"
+        read -r install_tools_choice
+        install_tools_choice=$(echo "$install_tools_choice" | tr '[:upper:]' '[:lower:]')
+
+        if [[ "$install_tools_choice" == "y" || "$install_tools_choice" == "yes" ]]; then
+            proot_login_cmd="proot-distro login ubuntu --user root"
+            bind_mount_path="/data/data/com.termux/files/home/storage/shared:/mnt/shared"
+            
+            echo -e "\n${R} [${W}-${R}]${C} Logging into Ubuntu as root and binding internal storage to install tools..."${W}
+            ${proot_login_cmd} --bind ${bind_mount_path} -- bash -c " \
+                echo -e '\\n${R} [${W}-${R}]${C} Updating Ubuntu packages...${W}'; \
+                apt update && apt upgrade -y; \
+                echo -e '\\n${R} [${W}-${R}]${C} Installing required build tools...${W}'; \
+                apt install -y git make gcc clang libssl-dev pkg-config flex bison libelf-dev libncurses-dev python3 python-is-python3 dos2unix curl unzip zip openjdk-17-jre; \
+                echo -e '\\n${R} [${W}-${R}]${G} Initial Ubuntu setup (tools) complete!\\n${W}' \
+            "
+            if [[ $? -ne 0 ]]; then
+                echo -e "\n${R} [${W}-${R}]${G} Error: Failed to complete setup inside Ubuntu!\n"${W}
+                exit 1
+            fi
+        else
+            echo -e "\n${R} [${W}-${R}]${Y} Skipping installation of build tools.${W}"
         fi
 
 	else
@@ -86,53 +93,42 @@ downloader(){
 	echo "Downloading $(basename $1)..."
 	curl --progress-bar --insecure --fail \
 		 --retry-connrefused --retry 3 --retry-delay 2 \
-		  --location --output ${path} "$2"
+		  --location --output "${path}" "$2"
 	echo
 }
 
 permission() {
 	banner
-	echo -e "${R} [${W}-${R}]${C} Setting up environment..."${W}
+	echo -e "${R} [${W}-${R}]${C} Setting up Environment..."${W}
 
-	local user_setup_script_name="user_setup.sh" # Or just "user.sh" if that's the canonical name
-	local user_setup_source_url="https://raw.githubusercontent.com/your_repo/your_user_setup_script.sh" # **IMPORTANT: Replace with actual URL**
-	
-	downloader "$CURR_DIR/$user_setup_script_name" "$user_setup_source_url"
-	
-	cp -f "$CURR_DIR/$user_setup_script_name" "$UBUNTU_DIR/root/$user_setup_script_name"
-	chmod +x "$UBUNTU_DIR/root/$user_setup_script_name"
-
-	local welcome_script_path="$UBUNTU_DIR/etc/profile.d/termux_ubuntu_welcome.sh"
-	local welcome_flag_file="$UBUNTU_DIR/root/.user_setup_done" # Flag file for user setup completion
-
-	cat > "$welcome_script_path" <<- 'EOF_WELCOME'
-	#!/bin/bash
-	# This script runs when logging into Ubuntu through proot-distro
-
-	# Check if this is the root user and if user setup has not been done yet
-	if [[ "$USER" == "root" && ! -f "/root/.user_setup_done" ]]; then
-	    echo -e "\n\e[1;32m [~] Welcome to Ubuntu Termux!\e[0m"
-	    echo -e "\e[1;33m [~] Để tạo người dùng mới và cài đặt lệnh 'ubuntu' cho lần đăng nhập sau, hãy chạy lệnh sau:\e[0m"
-	    echo -e "\e[1;36m       ./user_setup.sh\e[0m" # This will be the name of the script copied to /root/
-	    echo -e "\e[1;33m [~] Để bỏ qua việc tạo người dùng và sử dụng tài khoản root, chỉ cần bỏ qua thông báo này.\e[0m"
-	    echo -e "\e[1;33m [~] Lưu ý: Lệnh 'ubuntu' trực tiếp sẽ chỉ hoạt động sau khi bạn đã chạy ./user_setup.sh\e[0m\n"
+	if [[ -d "$CURR_DIR/distro" ]] && [[ -e "$CURR_DIR/distro/user.sh" ]]; then
+		cp -f "$CURR_DIR/distro/user.sh" "$UBUNTU_DIR/root/user.sh"
+	else
+		downloader "$CURR_DIR/user.sh" "https://raw.githubusercontent.com/modded-ubuntu/modded-ubuntu/master/distro/user.sh"
+		mv -f "$CURR_DIR/user.sh" "$UBUNTU_DIR/root/user.sh"
 	fi
-	EOF_WELCOME
-	chmod +x "$welcome_script_path"
+	chmod +x $UBUNTU_DIR/root/user.sh
 
-	echo "$(getprop persist.sys.timezone)" > "$UBUNTU_DIR/etc/timezone" 
+	setup_vnc
+	echo "$(getprop persist.sys.timezone)" > $UBUNTU_DIR/etc/timezone
+	echo "proot-distro login ubuntu" > $PREFIX/bin/ubuntu
+	chmod +x "$PREFIX/bin/ubuntu"
 	termux-reload-settings
 
-	banner
-	cat <<- EOF
-		${R} [${W}-${R}]${G} Basic Ubuntu-22.04 (CLI) and build tools are installed.
-		${R} [${W}-${R}]${G} Please restart Termux to apply changes.
-		${R} [${W}-${R}]${G} After restarting, log into Ubuntu as root to proceed with user setup:
-		${C}proot-distro login ubuntu --user root${G}
-		${R} [${W}-${R}]${G} Once inside Ubuntu, you will see instructions to create your user account.
-		${R} [${W}-${R}]${G} Good luck with your compilation!
-	EOF
-	{ echo; sleep 2; exit 1; }
+	if [[ -e "$PREFIX/bin/ubuntu" ]]; then
+		banner
+		cat <<- EOF
+			${R} [${W}-${R}]${G} Ubuntu-22.04 (CLI) is now Installed on your Termux
+			${R} [${W}-${R}]${G} Restart your Termux to Prevent Some Issues.
+			${R} [${W}-${R}]${G} Type ${C}ubuntu${G} to run Ubuntu CLI.
+			${R} [${W}-${R}]${G} If you Want to create user then ,
+			${R} [${W}-${R}]${G} Run ${C}ubuntu${G} first & then type ${C}bash user.sh${W}
+		EOF
+		{ echo; sleep 2; exit 1; }
+	else
+		echo -e "\n${R} [${W}-${R}]${G} Error Installing Distro !"${W}
+		exit 0
+	fi
 }
 
 package
