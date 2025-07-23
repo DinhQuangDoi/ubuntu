@@ -1,9 +1,9 @@
-### Giới Thiệu 
+### Introduce
 
 - This is Ubuntu Termux removed GUI version fork from https://github.com/modded-ubuntu/modded-ubuntu.git
 ### Install
-- B1 Install [Termux](https://termux.com) apk from [Here](https://f-droid.org/repo/com.termux_118.apk)
-- B2 Coppy & paste command
+- Install [Termux](https://termux.com) apk from [Here](https://f-droid.org/repo/com.termux_118.apk)
+- Coppy & paste command
 ```
   pkg update -y && pkg upgrade -y
   pkg install git wget -y
