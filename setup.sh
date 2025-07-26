@@ -69,7 +69,7 @@ distro() {
                 echo -e '\\n${R} [${W}-${R}]${C} Updating Ubuntu packages...${W}'; \
                 apt update && apt upgrade -y; \
                 echo -e '\\n${R} [${W}-${R}]${C} Installing required build tools...${W}'; \
-                apt install -y git make gcc clang libssl-dev pkg-config flex bison libelf-dev libncurses-dev python3 python-is-python3 dos2unix curl unzip zip openjdk-17-jre; \
+                apt install -y git make gcc clang libssl-dev pkg-config llvm flex bison libelf-dev libncurses-dev python3 python-is-python3 dos2unix curl unzip zip openjdk-17-jre; \
                 echo -e '\\n${R} [${W}-${R}]${G} Initial Ubuntu setup (tools) complete!\\n${W}' \
             "
             if [[ $? -ne 0 ]]; then
@@ -121,8 +121,8 @@ permission() {
 			${R} [${W}-${R}]${G} Ubuntu-22.04 (CLI) is now Installed on your Termux
 			${R} [${W}-${R}]${G} Restart your Termux to Prevent Some Issues.
 			${R} [${W}-${R}]${G} Type ${C}ubuntu${G} to run Ubuntu CLI.
-			${R} [${W}-${R}]${G} If you Want to create user then ,
-			${R} [${W}-${R}]${G} Run ${C}ubuntu${G} first & then type ${C}bash user.sh${W}
+			${R} [${W}-${R}]${G} To create user
+			${R} [${W}-${R}]${G} Run ${C}bash user.sh${W} after login Ubuntu
 		EOF
 		{ echo; sleep 2; exit 1; }
 	else
