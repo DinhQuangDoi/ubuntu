@@ -48,7 +48,7 @@ distro() {
     if [ -d "$UBUNTU_DIR" ]; then
         echo "[*] Ubuntu installation complete."
 
-        read -p "[?] Do you want to install common development tools inside Ubuntu? (y/n): " install_tools_choice
+        read -p "[?] Do you want to install kernel builds tools ? (y/n): " install_tools_choice
         install_tools_choice=$(echo "$install_tools_choice" | tr '[:upper:]' '[:lower:]')
 
         if [[ "$install_tools_choice" == "y" || "$install_tools_choice" == "yes" ]]; then
@@ -56,9 +56,9 @@ distro() {
             proot-distro login ubuntu --user root --bind "$HOME/storage/shared:/mnt/shared" -- bash -c "
                 echo '[*] Updating packages...';
                 apt update && apt upgrade -y;
-                echo '[*] Installing development tools...';
+                echo '[*] Installing build tools...';
                 apt install -y git make gcc clang libssl-dev pkg-config llvm flex bison libelf-dev libncurses-dev python3 python-is-python3 dos2unix curl unzip zip openjdk-17-jre;
-                echo '[*] Development tools installed.';
+                echo '[*] Build tools installed.';
             " || {
                 echo "[!] Error: Failed to complete tool installation."
                 exit 1
