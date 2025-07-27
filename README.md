@@ -29,26 +29,5 @@
 
 - **Type `bash remove.sh` to remove Ubuntu Modded Os.**
 
-### Changelog: 
-- added build tool installation option for users who want to compile kernel.
-- edit banner.
-
-### Credits : 
-
-```
-This Tool Uses the ubuntu image provided by the termux package `proot-distro` 
-
-Full Credit of the Ubuntu image goes to them .
-
-Termux Proot Distro - https://github.com/termux/proot-distro
-```
-
-### Maintainers.
-
-- [**Mustakim Ahmed**](https://github.com/BDhackers009)
-- [**Tahmid Rayat**](https://github.com/htr-tech)
-- [**0xBaryonyx**](https://github.com/Mahfuz-THBD)
-
-
 ### Hope it helps you <3.
 
