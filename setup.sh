@@ -109,12 +109,12 @@ permission() {
 
     if [[ -x "$PREFIX/bin/ubuntu" ]]; then
         banner
-    cat <<- EOF
-        [+] Ubuntu (CLI) is now installed on your Termux.
-        [+] Restart Termux to avoid potential issues.
-        [+] Type: ubuntu      --> to start Ubuntu CLI
-        [+] Inside Ubuntu: bash user.sh   --> to create user
-        EOF
+        cat <<- EOF
+[+] Ubuntu (CLI) is now installed on your Termux.
+[+] Restart Termux to avoid potential issues.
+[+] Type: ubuntu      --> to start Ubuntu CLI
+[+] Inside Ubuntu: bash user.sh   --> to create user
+EOF
     else
         echo "[!] Error: Failed to set up Ubuntu launcher."
         exit 1
