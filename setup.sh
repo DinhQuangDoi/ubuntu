@@ -109,7 +109,7 @@ permission() {
 
     if [[ -x "$PREFIX/bin/ubuntu" ]]; then
         banner
-        cat <<- EOF
+    cat <<- EOF
         [+] Ubuntu (CLI) is now installed on your Termux.
         [+] Restart Termux to avoid potential issues.
         [+] Type: ubuntu      --> to start Ubuntu CLI
